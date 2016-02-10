@@ -8,7 +8,7 @@ app.config(function (ezfbProvider){
 });
 
 app.factory('socket', function(){
-    return io.connect('http://localhost:3000');
+    return io.connect('http://funexperiment.azurewebsites.net/');
 });
 
 app.controller('quizCtrl', function($scope, socket,ezfb){
