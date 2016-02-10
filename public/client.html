@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="adminpanel">
+<head>
+    <title>Quiz app</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+    <link rel="stylesheet" href="client.css">
+
+</head>
+<body>
+<h1 layout-margin>Welkom bij de quiz</h1>
+
+<div ng-controller="quizCtrl">
+    <div layout="row" layout-align="start center">
+        <md-button class="md-raised md-primary" layout-padding ng-click="login()" ng-show="loginStatus.status == undefined || loginStatus.status == 'unknown' ">facebook login</md-button>
+        <md-button class="md-raised md-warn" layout-padding ng-click="logout()" ng-show="loginStatus.status == 'connected'">facebook logout</md-button>
+    </div>
+    <div ng-show="vraag != undefined && loginStatus.status == 'connected'">
+        <div layout="row" layout-align="start center">
+            <label layout-padding>Vraag:</label>
+            <label>{{vraag}}</label>
+        </div>
+
+        <div layout="column" layout-align="start start" >
+            <label layout-padding>antwoord:</label>
+            <md-radio-group layout="column" ng-model="quiz.antwoord" ng-show="type == 1">
+                <md-radio-button value="ja">ja</md-radio-button>
+                <md-radio-button value="nee">nee</md-radio-button>
+                <p>Selected Value: <span class="radioValue">{{ quiz.antwoord }}</span> </p>
+            </md-radio-group>
+            <md-radio-group layout="column" ng-model="quiz.antwoord" ng-show="type == 2">
+                <md-radio-button value="A">A ({{keuze1}})</md-radio-button>
+                <md-radio-button value="B">B ({{keuze2}})</md-radio-button>
+                <md-radio-button value="C">C ({{keuze3}})</md-radio-button>
+                <p>Selected Value: <span class="radioValue">{{ quiz.antwoord }}</span> </p>
+            </md-radio-group>
+        </div>
+        <div layout="row" layout-align="start center">
+            <md-button class="md-raised md-primary" layout-padding ng-click="verstuurantwoord()">Verstuur antwoord</md-button>
+        </div>
+    </div>
+    <div ng-show="loginStatus.status == 'connected' && vraag == undefined">
+        <p>wachten op de volgende vraag</p>
+        <p>status: {{loginStatus.status}}</p>
+        <p>username: {{apiMe.name}}</p>
+    </div>
+</div>
+
+
+<script src="socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="client.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
+<script src="http://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
+
+
+</body>
+</html>

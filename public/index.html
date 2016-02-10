@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="adminpanel">
+<head>
+    <title>Chat App</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+    <link rel="stylesheet" href="index.css">
+
+    <script src="socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+<h1 layout-margin>Stel u vraag</h1>
+<div ng-controller="quizCtrl">
+    <div layout-padding>
+        <div layout="row" layout-align="start center">
+            <label layout-padding>Vraag</label>
+            <input ng-model="quiz.vraag">
+        </div>
+        <div layout="row" layout-align="start center">
+            <label layout-padding>punten vraag</label>
+            <input type="number" ng-model="quiz.punten">
+        </div>
+        <div layout="row" layout-align="start center">
+            <label>type vraag:</label>
+            <md-radio-group layout="row" ng-model="quiz.type">
+                <md-radio-button value="1">ja/nee</md-radio-button>
+                <md-radio-button value="2"> mutiple choice </md-radio-button>
+                <p>Selected Value: <span class="radioValue">{{ quiz.type }}</span> </p>
+            </md-radio-group>
+        </div>
+
+        <div layout="column" layout-margin layout-align="start start" ng-show="quiz.type == 1 || quiz.type == 2">
+            <label>Antwoord</label>
+            <md-radio-group layout="row" ng-model="quiz.antwoord" ng-show="quiz.type == 1">
+                <md-radio-button value="ja">ja</md-radio-button>
+                <md-radio-button value="nee"> nee</md-radio-button>
+                <p>Selected Value: <span class="radioValue">{{ quiz.antwoord }}</span> </p>
+            </md-radio-group>
+            <div layout="column" ng-show="quiz.type == 2">
+                <md-radio-group layout="row" ng-model="quiz.antwoord" >
+                    <md-radio-button value="A">A</md-radio-button>
+                    <md-radio-button value="B">B</md-radio-button>
+                    <md-radio-button value="C">C</md-radio-button>
+                    <p>Selected Value: <span class="radioValue">{{ quiz.antwoord }}</span> </p>
+                </md-radio-group>
+                <div layout="row" layout-align="start center">
+                    <label layout-padding>keuze 1</label>
+                    <input ng-model="quiz.keuze1">
+                </div>
+                <div layout="row" layout-align="start center">
+                    <label layout-padding>keuze 2</label>
+                    <input ng-model="quiz.keuze2">
+                </div>
+                <div layout="row" layout-align="start center">
+                    <label layout-padding>keuze 3</label>
+                    <input ng-model="quiz.keuze3">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div layout="row" layout-align="start center">
+            <md-button class="md-raised md-primary" layout-padding ng-click="verstuur()">Verstuur</md-button>
+            <md-button class="md-raised md-warn" ng-click="Clear()">clear</md-button>
+        </div>
+
+    </div>
+</div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+</body>
+</html>
